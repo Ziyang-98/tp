@@ -120,7 +120,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Remarks ")
+        builder.append(" Remarks: ")
                 .append(getRemark());
         return builder.toString();
     }
