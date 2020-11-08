@@ -5,12 +5,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CommonCentsParser" as CommonCentsParser LOGIC_COLOR
 participant ":EditAccountCommandParser" as EditAccountCommandParser LOGIC_COLOR
-participant "u:EditAccountCommand" as EditAccountCommand LOGIC_COLOR
+participant "e:EditAccountCommand" as EditAccountCommand LOGIC_COLOR
 end box
-
-'box ActiveAccount ACTIVEACCOUNT_COLOR_T1
-'participant ":ActiveAccountManager" as ActiveAccount LOGIC_COLOR
-'end box
 
 box Model MODEL_COLOR_T1
 participant ":ActiveAccountManager" as ActiveAccount MODEL_COLOR
@@ -33,29 +29,32 @@ activate EditAccountCommand
 EditAccountCommand -> EditAccountCommandParser
 deactivate EditAccountCommand
 
-EditAccountCommandParser --> CommonCentsParser
+EditAccountCommandParser --> CommonCentsParser : e
 deactivate EditAccountCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EditAccountCommandParser -[hidden]-> CommonCentsParser
 destroy EditAccountCommandParser
 
-CommonCentsParser --> LogicManager
+CommonCentsParser --> LogicManager : e
 deactivate CommonCentsParser
 
 LogicManager -> EditAccountCommand: execute()
 activate EditAccountCommand
 
-EditAccountCommand -> ActiveAccount: setName("new name")
-activate ActiveAccount
+ref over EditAccountCommand, ActiveAccount, Model: updating new name
 
-ActiveAccount --> EditAccountCommand
-deactivate ActiveAccount
+'EditAccountCommand -> ActiveAccount: setName("new name")
+'activate ActiveAccount
+'
+'ActiveAccount --> EditAccountCommand
+'deactivate ActiveAccount
+'
+'EditAccountCommand -> Model: setAccount()
+'activate Model
+'
+'Model --> EditAccountCommand
+'deactivate Model
 
-EditAccountCommand -> Model: setAccount()
-activate Model
-
-Model --> EditAccountCommand
-deactivate Model
 
 EditAccountCommand --> LogicManager : result
 deactivate EditAccountCommand

@@ -112,9 +112,6 @@ The `Model`,
 * stores an unmodifiable list of Accounts.
 * does not depend on any of the other three components.
 
-The `Account`,
-
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CommonCents`, which `Entry` references. This allows `CommonCents` to only require one `Tag` object per unique `Tag`, instead of each `Entry` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
@@ -265,9 +262,12 @@ The following sequence diagram shows how an edit account operation works:
 
 ![EditAccountSequenceDiagram](images/EditAccountSequenceDiagram.png)
 
+![EditAccountSequenceRefDiagram](images/EditAccountSequenceRefDiagram.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 
 * The lifeline for `EditAccountCommandParser` and `EditAccountCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, their lifeline reach the end of diagram.
+* The reference diagram should have the notation on the top left corner, but due to a limitation of PlantUML, a title is used to replace the notation.
 * Some of the interactions with the utility classes, such as `CommandResult`, `CommandResultFactory` and `Storage` are left out of the sequence diagram as their roles are not significant in the execution
 of the edit account command. 
 
