@@ -9,8 +9,9 @@ participant "e:EditAccountCommand" as EditAccountCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":ActiveAccountManager" as ActiveAccount MODEL_COLOR
-participant ":ModelManager" as Model MODEL_COLOR
+'participant ":ActiveAccountManager" as ActiveAccount MODEL_COLOR
+'participant ":ModelManager" as Model MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("editacc 1 n/new name")
@@ -41,7 +42,7 @@ deactivate CommonCentsParser
 LogicManager -> EditAccountCommand: execute()
 activate EditAccountCommand
 
-ref over EditAccountCommand, ActiveAccount, Model: updating new name
+ref over EditAccountCommand, Model: updating new name
 
 'EditAccountCommand -> ActiveAccount: setName("new name")
 'activate ActiveAccount
